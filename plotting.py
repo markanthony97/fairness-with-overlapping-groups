@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pickle
+import os
 
 def capitalize(string):
     return str.upper(string[0])+str[1:]
@@ -84,21 +85,28 @@ if __name__ == '__main__':
     exps = ['ind', 'eo']
     plottype = int(input())
     if plottype in [0,1]:
-        fig, axes = plt.subplots(2,4,figsize=(25, 11))
-        for i,dset in enumerate(['communities', 'adult', 'german', 'lawschool']):
+        fig, axes = plt.subplots(1,2,figsize=(25, 11))
+        for i,dset in enumerate(['adult']):
+        # for i,dset in enumerate(['communities', 'adult', 'german', 'lawschool']):
             print('======================================')
             print(f'Plotting {dset} results....')
             with open(f'results/{dset}_{exps[plottype]}.pkl', 'rb') as f:
                 results = pickle.load(f)
-            plot_results(axes[0,i], results, dset, plottype=plottype)
-            plot_results(axes[1,i], results, dset, True, plottype=plottype)
+            plot_results(axes[i,0], results, dset, plottype=plottype)
+            plot_results(axes[i,1], results, dset, True, plottype=plottype)
     if plottype == 2:
         fig, axes = plt.subplots(2,3, figsize=(18.5, 11))
-        for i, dset in enumerate(['adult', 'german', 'lawschool']):
+        # for i, dset in enumerate(['adult', 'german', 'lawschool']):
+        for i, dset in enumerate(['adult']):
             print('======================================')
             print(f'Plotting {dset} results....')
             with open(f'results/{dset}_gerry.pkl', 'rb') as f:
                 results = pickle.load(f)
-            plot_results(axes[0,i], results, dset, gerry=True)
-            plot_results(axes[1,i], results, dset, True, gerry=True)
+            plot_results(axes[i,0], results, dset, gerry=True)
+            plot_results(axes[i,1], results, dset, True, gerry=True)
+    
+    
+    if not os.path.exists("plots"):
+        os.mkdir("plots")
+
     fig.savefig(f"plots/{name}")

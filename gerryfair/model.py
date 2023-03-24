@@ -10,7 +10,7 @@ from gerryfair.reg_oracle_class import RegOracle
 import matplotlib
 import random
 
-matplotlib.use('TkAgg')
+
 import matplotlib.pyplot as plt
 
 class Model:

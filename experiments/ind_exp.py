@@ -3,6 +3,7 @@ from algos import groupfair, regularizer
 from utils import calc_acc, calc_ind_viol
 
 methods = [regularizer.Regularizer, groupfair.Plugin, groupfair.WERM]
+# reduce this
 params_list = [{'rho':np.logspace(-1,5, 30), 'T': [7500], 'lr':[0.01], 'nlayers': [1]}, 
                {'B':[50], 'nu':np.logspace(-3,0,20), 'T':[10000], 'lr': [0.1]},
                {'B':[50], 'nu':np.logspace(-3,0,20), 'T':[10000], 'lr': [0.1]}]
